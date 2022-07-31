@@ -3,11 +3,14 @@ const app = express()
 const db = require('./Db/connect')
 const data = require('./model/data')
 const path = require("path")
+app.set("views",path.join(__dirname,"/views"))
+app.set("view engine","ejs")
 app.use(express.static("img"))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.get("/account/login",(req,res)=>{
-    res.sendFile(path.join(__dirname,"/index.html"))
+    
+    res.render("index")
 })
 app.post("/account/authlogin",async(req,res)=>{
     const{name,password}= req.body
